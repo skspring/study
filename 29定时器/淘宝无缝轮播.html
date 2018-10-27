@@ -1,0 +1,263 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px"宋体", "Arial Narrow", HELVETICA;
+            background: #fff;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        #carouselImg {
+            position: relative;
+            margin: 200px auto 0;
+            width: 520px;
+            height: 280px;
+            overflow: hidden;
+        }
+        .imgArea{
+            position: absolute;
+            transition: left .3s;
+        }
+        .imgArea::after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .imgArea li {
+            float: left;
+        }
+        .bottomTab{
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            height: 10px;
+            text-align: center;
+        }
+        .bottomTab li{
+            display: inline-block;
+            margin: 0 2px;
+            width: 8px;
+            height: 8px;
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .bottomTab li.active{
+            border-color: orange;
+            background: orange;
+        }
+        #carouselImg div{
+            display: none;
+            position: absolute;
+            top: 120px;
+            width: 20px;
+            height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            background: rgba(0,0,0,.3);
+        }
+        #carouselImg:hover div{
+            display: block;
+        }
+        #carouselImg div::after{
+            content: ">";
+            line-height: 40px;
+            
+        }
+        #carouselImg div:nth-of-type(1){
+            right: 0;
+        }
+        #carouselImg div:nth-of-type(2)::after{
+            content: "<";
+        }
+    </style>
+</head>
+
+<body>
+    <div id="carouselImg">
+        <ul class="imgArea">
+        </ul>
+        <ul class="bottomTab">
+        </ul>
+        <div class="nextBtn"></div>
+        <div class="prevBtn"></div>
+    </div>
+    <script>
+        (function(data) {
+            let carouselImg = document.getElementById("carouselImg"),
+                imgArea = document.querySelector("#carouselImg .imgArea"),
+                tabList = document.querySelector("#carouselImg .bottomTab"),
+                nextBtn = document.querySelector("#carouselImg .nextBtn"),
+                prevBtn = document.querySelector("#carouselImg .prevBtn")
+                bottomBtn = null,
+                imgNum = data.length,
+                imgHtml = "",
+                step = 603,
+                index = 0,
+                btnIndex = 0;
+            //构建图片以及按钮区域
+            (function(){
+                imgArea.style.width = (imgNum + 2) + "00%";
+                data.forEach(images => {
+                    imgHtml += `<li><img src="${images.path}" alt=""></li>`;
+                    tabList.innerHTML +=`<li></li>`;
+                });
+                imgArea.innerHTML = `<li><img src="${data[imgNum-1].path }" alt=""></li>${imgHtml}<li><img src="${data[0].path}" alt=""></li>`;
+            })();
+            //获取底部按钮
+            bottomBtn = document.querySelectorAll("#carouselImg .bottomTab li");
+            //更新状态事件函数
+            function updateImg(){
+                for(let i = 0; i < imgNum; i++ ){
+                    bottomBtn[i].classList.remove("active");
+                }
+                bottomBtn[btnIndex].classList.add("active");
+                imgArea.style.left = `${-(index+1)*step}px`;
+            }
+            updateImg();
+            
+            //底部按钮点击事件
+            [...bottomBtn].forEach((dom,isOclick) => {
+                dom.onclick = function(){
+                    if(index === isOclick)return;
+                    index = isOclick;
+                    btnIndex = isOclick;
+                    updateImg();
+                }
+            });
+            //点击NEXT按钮
+            nextBtn.onclick = function(){
+                index++;
+                btnIndex = index % imgNum;
+                if(index < imgNum + 1){
+                    updateImg();
+                }else{
+                    index = index % imgNum;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(index)*step}px`;
+                    setTimeout(() => {
+                        imgArea.style.transition = "left 0.3s";
+                        updateImg();
+                    }, 1000/60);
+                } 
+            };
+            //点击prev按钮
+            prevBtn.onclick = function(){
+                index--;
+                btnIndex = (imgNum+index) % imgNum;
+                if(index >= -1 ){
+                    updateImg();
+                }else{
+                    index =(imgNum+index) % imgNum;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(index+2)*step}px`;
+                    setTimeout(() => {
+                        imgArea.style.transition = "left 0.3s";
+                        updateImg();
+                    }, 1000/60);
+                }   
+            };
+            //计时器轮播
+            let timer = setInterval(function(){
+                index++;
+                btnIndex = index % imgNum;
+                if(index < imgNum + 1){
+                    updateImg();
+                }else{
+                    index = index % imgNum;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(index)*step}px`;
+                    setTimeout(() => {
+                        imgArea.style.transition = "left 0.3s";
+                        updateImg();
+                    }, 1000/60);
+                } 
+            },3000);
+            //鼠标移入 停止计时器
+            imgArea.onmouseenter = function(){
+                clearInterval(timer);
+            }
+            //鼠标移出 重建计时器
+            imgArea.onmouseleave = function(){
+                timer = setInterval(function(){
+                index++;
+                btnIndex = index % imgNum;
+                if(index < imgNum + 1){
+                    updateImg();
+                }else{
+                    index = index % imgNum;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(index)*step}px`;
+                    setTimeout(() => {
+                        imgArea.style.transition = "left 0.3s";
+                        imgArea.style.transition = "left 0s";
+                        imgArea.style.left = `${-(index)*step}px`;
+                        updateImg();
+                    }, 1000/60);
+                } 
+            },3000);
+            }
+
+        })
+        ([  
+            {
+                id: 0,
+                path: "./images/1.webp"
+            },
+            {
+                id: 1,
+                path: "./images/2.jpg"
+            },
+            {
+                id: 2,
+                path: "./images/3.jpg"
+            },
+            {
+                id: 3,
+                path: "./images/4.jpg"
+            },
+            {
+                id: 4,
+                path: "./images/5.webp"
+            }
+        ]);
+    </script>
+</body>
+
+</html>

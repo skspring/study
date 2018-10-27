@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px"宋体", "Arial Narrow", HELVETICA;
+            background: #fff;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        #carouselImg {
+            position: relative;
+            margin: 200px auto 0;
+            width: 520px;
+            height: 280px;
+            overflow: hidden;
+        }
+        .imgArea{
+            position: absolute;
+        }
+        .imgArea::after {
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+
+        .imgArea li {
+            float: left;
+        }
+        .bottomTab{
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            height: 10px;
+            text-align: center;
+        }
+        .bottomTab li{
+            display: inline-block;
+            margin: 0 2px;
+            width: 8px;
+            height: 8px;
+            border: 1px solid #fff;
+            background: #fff;
+            border-radius: 50%;
+        }
+        .bottomTab li.active{
+            border-color: orange;
+            background: orange;
+        }
+        #carouselImg div{
+            display: block;
+            position: absolute;
+            top: 120px;
+            width: 20px;
+            height: 40px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            background: rgba(0,0,0,.3);
+            visibility: hidden;
+        }
+        #carouselImg:hover div{
+            visibility: visible;
+        }
+        #carouselImg div:hover{
+            background: rgba(0,0,0,.8);
+        }
+        
+        #carouselImg div::after{
+            content: ">";
+            line-height: 40px;
+            
+        }
+        #carouselImg div:nth-of-type(1){
+            right: 0;
+        }
+        #carouselImg div:nth-of-type(2)::after{
+            content: "<";
+        }
+    </style>
+</head>
+
+<body>
+    <div id="carouselImg">
+        <ul class="imgArea">
+        </ul>
+        <ul class="bottomTab">
+        </ul>
+        <div class="nextBtn"></div>
+        <div class="prevBtn"></div>
+    </div>
+    <script>
+        (function(data) {
+            let carouselImg = document.getElementById("carouselImg"),
+                imgArea = document.querySelector("#carouselImg .imgArea"),
+                tabList = document.querySelector("#carouselImg .bottomTab"),
+                nextBtn = document.querySelector("#carouselImg .nextBtn"),
+                prevBtn = document.querySelector("#carouselImg .prevBtn"),
+                bottomBtn = null,
+                imgList =null,
+                imgHtml = "",
+                step = 0,
+                index = 0,
+                imgIndex = 1,
+                listLength = data.length
+                ;
+            //构建图片以及按钮区域
+            (function(){
+                imgArea.style.width = (data.length + 2) + "00%";
+                data.forEach(images => {
+                    imgHtml += `<li><img src="${images.path}" alt=""></li>`;
+                    tabList.innerHTML +=`<li></li>`;
+                });
+                imgArea.innerHTML = `<li><img src="${data[data.length-1].path}" alt=""></li>${imgHtml}<li><img src="${data[0].path}" alt=""></li>`;
+            })();
+            //获取底部按钮  IMG LI列表 步长
+            bottomBtn = document.querySelectorAll("#carouselImg .bottomTab li");
+            imgList = document.querySelectorAll("#carouselImg .imgArea li");
+            step = imgArea.offsetWidth/imgList.length;
+            //更新界面状态函数
+            function updateImg(){
+                for(let i = 0; i < listLength; i++ ){
+                    bottomBtn[i].classList.remove("active");
+                }
+                bottomBtn[index].classList.add("active");
+                setTimeout(function(){
+                    imgArea.style.transition = "left .3s";
+                    imgArea.style.left = `${-(imgIndex)*step}px`;
+                },1000/30)
+            }
+            updateImg();
+
+
+            //底部按钮点击事件
+            [...bottomBtn].forEach((dom,isOclick) => {
+                dom.onclick = function(){
+                    if(index === isOclick)return;
+                    index = isOclick;
+                    imgIndex = index + 1;
+                    updateImg();
+                }
+            });
+            //nextBtn点击事件
+            nextBtn.onclick = function(){
+                index++;
+                index %= listLength;
+                imgIndex++;
+                if(imgIndex < imgList.length){
+                    updateImg();
+                }else{
+                    imgIndex %= listLength;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(imgIndex-1)*step}px`;
+                    updateImg();
+                }
+            }
+            //prevBtn点击事件
+            prevBtn.onclick = function() {
+                index--;
+                index = (listLength + index) % listLength;
+                imgIndex--;
+                if(imgIndex >= 0){
+                    updateImg();
+                }else{
+                    imgIndex = (listLength + imgIndex) % listLength;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(imgIndex+1)*step}px`;
+                    updateImg();
+                }
+            }
+       
+            //轮播滚动
+            let timer = setInterval(function fn(){
+                index++;
+                index %= listLength;
+                imgIndex++;
+                if(imgIndex < imgList.length){
+                    updateImg();
+                }else{
+                    imgIndex %= listLength;
+                    imgArea.style.transition = "left 0s";
+                    imgArea.style.left = `${-(imgIndex-1)*step}px`;
+                    updateImg();
+                }
+            },1000);
+
+            //鼠标移入轮播停止
+            carouselImg.onmouseenter = function(){
+                clearInterval(timer);
+            }
+            //鼠标移出继续轮播
+            carouselImg.onmouseleave = function(){
+                timer = setInterval(function(){
+                    index++;
+                    index %= listLength;
+                    imgIndex++;
+                    if(imgIndex < imgList.length){
+                        updateImg();
+                    }else{
+                        imgIndex %= listLength;
+                        imgArea.style.transition = "left 0s";
+                        imgArea.style.left = `${-(imgIndex-1)*step}px`;
+                        updateImg();
+                    }
+                },1000);
+            }
+        })
+        ([  
+            {
+                id: 0,
+                path: "./images/1.webp"
+            },
+            {
+                id: 1,
+                path: "./images/2.jpg"
+            },
+            {
+                id: 2,
+                path: "./images/3.jpg"
+            },
+            {
+                id: 3,
+                path: "./images/4.jpg"
+            },
+            {
+                id: 4,
+                path: "./images/5.webp"
+            }
+        ]);
+    </script>
+</body>
+
+</html>

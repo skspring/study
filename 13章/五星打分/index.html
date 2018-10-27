@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./iconfont/iconfont.css">
+    <style>
+        ul{
+            display: inline-block;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        ul:after{
+            content: '';
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        ul li{
+            float: left;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+        #wrap{
+            margin: 100px auto 0;
+            width: 400px;
+            height: 150px;  
+            
+            user-select: none;
+        }
+        #wrap p{
+            display: inline-block;
+            margin: 0;
+            font-size: 20px;
+            line-height: 150px;
+            vertical-align: 6px;
+        }
+        #wrap span{
+            font-size: 30px;
+            color: #ccc;
+        }
+        #wrap span.active{
+            color: rgb(150, 18, 8);
+        }
+        #wrap div{
+            float: right;
+            width: 150px;
+            height: 150px;
+            font-size: 30px;
+            text-align: center;
+            line-height: 150px;
+            color: orange;
+            outline: 1px solid orange;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <p>请评分
+        </p>
+        <ul>
+            <li ><span class="iconfont icon-pingjia"></span></li>
+            <li><span class="iconfont icon-pingjia"></span></li>
+            <li><span class="iconfont icon-pingjia"></span></li>
+            <li><span class="iconfont icon-pingjia"></span></li>
+            <li><span class="iconfont icon-pingjia"></span></li>
+        </ul>
+        <div>
+            
+        </div>
+    </div>
+    <script>
+        (function() {
+            let oList = document.querySelector("#wrap ul"),
+                aStars = document.querySelectorAll("#wrap li span"),
+                oTextArea = document.querySelector("#wrap div")
+                len = aStars.length,
+                isClick = -1,
+                aTexts = [
+                    "请评分!",
+                    "垃圾!",
+                    "辣鸡!",
+                    "不错哦!",
+                    "好好!",
+                    "干!"
+                ];
+            oTextArea.innerHTML = aTexts[isClick+1];
+            for(let i = 0; i < len; i++) {
+                aStars[i].onmouseenter = function() {
+                    for(let x = 0; x < len; x++) {
+                        aStars[x].className = x <= i ? "iconfont icon-pingjia active" : "iconfont icon-pingjia";
+                        oTextArea.innerHTML = aTexts[i+1];
+                    }
+                };
+                aStars[i].onclick = function() {
+                    isClick = i;
+                };
+            }
+                oList.onmouseleave = function() {
+                    for(let x = 0; x < len; x++) {
+                            aStars[x].className = x <= isClick ? "iconfont icon-pingjia active" : "iconfont icon-pingjia";
+                            oTextArea.innerHTML = aTexts[isClick + 1];
+                    }
+                };
+        })()        
+    </script>
+</body>
+</html>

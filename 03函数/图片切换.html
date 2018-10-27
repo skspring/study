@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            margin: 100px auto 0;
+            width: 604px;
+            height: 298px;
+            overflow: hidden;
+        }
+        .picBox{
+            position: relative;
+            left: 0;
+            height: 100%;
+        }
+        .picBox.tran{
+            transition: .3s;
+        }
+        .picBox li{
+            float: left;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+            <ul class="picBox"></ul>
+    </div>
+    
+    <script>
+        (function(date){
+            let pixBox = document.querySelector(".picBox"),
+                step = document.querySelector("#wrap").clientWidth,
+                index = 0,
+                isTrans = "add";
+            //更新图片方法
+            function updatePic(isTrans = "remove",index = 0){
+                pixBox.classList[isTrans]("tran");
+                pixBox.style.left = `${-index*step}px`;
+            }
+            //页面初始化
+            (function(){
+                pixBox.style.width = `${(date.length+1)*step}px`; 
+                date.forEach(ele => pixBox.innerHTML += `<li style="background:url('${ele.path}');width:${step}px"></li>`); 
+                pixBox.innerHTML += `<li style="background:url('${date[0].path}');width:${step}px"></li>`;
+            })();
+            //点击事件
+            pixBox.onclick = function (){
+                index ++;
+                updatePic(isTrans,index);
+                if(index === date.length){
+                    index = index % date.length;
+                    setTimeout(updatePic, 300);
+                }
+            };
+        })([
+            {
+                id : 0,
+                path : "./images/1.jpg"
+            },
+            {
+                id : 1,
+                path : "./images/2.jpg"
+            },
+            {
+                id : 2,
+                path : "./images/3.jpg"
+            },
+            {
+                id : 3,
+                path : "./images/4.jpg"
+            },
+            {
+                id : 4,
+                path : "./images/5.jpg"
+            },
+            {
+                id : 5,
+                path : "./images/6.jpg"
+            },
+            {
+                id : 6,
+                path : "./images/7.jpg"
+            },
+            {
+                id : 7,
+                path : "./images/8.jpg"
+            }
+        ])
+    </script>
+</body>
+</html>

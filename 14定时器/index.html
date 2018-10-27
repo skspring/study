@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px"宋体", "Arial Narrow", HELVETICA;
+            background: #fff;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        #wrap {
+            position: relative;
+            margin: 50px auto 0;
+            width: 500px;
+            height: 500px;
+            border: 1px solid #000;
+            border-radius: 50%;
+        }
+
+        #wrap div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 50px;
+
+            border-radius: 50%;
+        }
+
+        #wrap img {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            z-index: 99;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <img src="./images/1.png" alt="">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <script>
+        let oWrap = document.getElementById("wrap"),
+            aDiv = oWrap.getElementsByTagName("div"),
+            oImg = oWrap.getElementsByTagName("img")[0],
+            len = aDiv.length,
+            deg = 0,
+            index = 0;
+
+
+        setInterval(function () {
+            deg += 1;
+            let x = 250 + 250 * Math.cos(deg * Math.PI / 180) - 25;
+            let y = 250 + 250 * Math.sin(deg * Math.PI / 180) - 25;
+            oImg.style.top = y + "px";
+            oImg.style.left = x + "px";
+            if (deg % 15 === 0) {
+                index++;
+                index = index % len;
+                aDiv[index].style.top = y + "px";
+                aDiv[index].style.left = x + "px";
+                aDiv[index].style.backgroundColor = getColor();
+            }
+        }, 1000 / 60)
+
+        function getColor() {
+            let r = Math.floor(Math.random() * 256),
+                g = Math.floor(Math.random() * 256),
+                b = Math.floor(Math.random() * 256);
+            return (`rgb(${r},${g},${b})`)
+        }
+    </script>
+</body>
+
+</html>

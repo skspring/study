@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>开班作业</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        body{
+            background: #000;
+            text-align: center;
+            user-select: none;
+        }
+        #wrap{
+            position: relative;
+            display: inline-block;
+            margin-top: 100px;
+            border: 1px solid #fff;
+            overflow: hidden;
+        }
+        #wrap:after{
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        #wrap li{
+            position: relative;
+            float: left;
+            overflow: hidden;
+        }
+        #wrap li input{
+            position: absolute;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            z-index: 999;
+            opacity: 0;
+        }
+        #wrap li input:checked~div{
+            width: 300px;
+            opacity: 1;
+        }
+        #wrap li div{
+            width: 150px;
+            height: 300px;
+            opacity: .3;
+            transition: .3s;
+        }
+        #wrap li:nth-of-type(1) div{ 
+            background:url("./img/1.png") center/cover;
+        }
+        #wrap li:nth-of-type(2) div{
+            background: url("./img/2.png") center/cover;
+        }
+        #wrap li:nth-of-type(3) div{
+            background: url("./img/3.png") center/cover;
+        }
+        #wrap li:nth-of-type(4) div{
+            background: url("./img/4.png") center/cover;
+        }
+        
+        #wrap div img{
+            position: relative;
+            top: 150px;
+            left: 75px;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: .5s;
+            transform-origin: center;
+        }
+        #wrap input:checked~div img{
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 300px;
+            visibility: visible;
+            opacity: 1;
+        }
+        #wrap span{
+            position: absolute;
+            left: 500px;
+            font-size: 20px;
+            white-space: nowrap;
+            color: red;
+            animation: 8s run infinite linear;
+        }
+        @keyframes run{
+            100%{
+                left: -300px;
+            }
+        }
+        #wrap span:nth-of-type(2){
+            top: 50px;
+            left: 800px;
+        }
+        #wrap span:nth-of-type(3){
+            top: 70px;
+            left: 600px;
+        }
+        #wrap span:nth-of-type(4){
+            font-size: 30px;
+            top: 120px;
+            left: 900px;
+        }
+        #wrap span:nth-of-type(5){
+            font-size: 30px;
+            top: 180px;
+            left: 1000px;
+        }
+    </style>
+</head>
+<body>
+    <ul id="wrap">
+        <li>
+            <input type="radio" name="check" checked>
+            <div>
+                <img src="./img/5.png" alt="" width="723" height="723">
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="check">
+            <div>
+                <img src="./img/6.png" alt="" width="723" height="723">
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="check">
+            <div>
+                <img src="./img/7.png" alt="" width="723" height="723">
+            </div>
+        </li>
+        <li>
+            <input type="radio" name="check">
+            <div>
+                <img src="./img/8.png" alt="" width="723" height="723">
+            </div>
+        </li>
+        
+        <span>哈喽！大家好！</span>
+        <span>我是66期前端html+css班学员 奎</span>
+        <span>大家多多指教！</span>
+        <span>一起跟着银佬好好学习！</span>
+        <span>天天向上！</span>
+    </ul>    
+</body>
+</html>

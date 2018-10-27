@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #clock{
+            margin: 100px auto 0;
+            width: 280px;
+            height: 60px;
+            
+        }
+        #clock b{
+            float: left;
+            display: inline-block;
+            width: 20px;
+            height: 60px;
+            font-size: 30px;
+            line-height: 60px;
+        }
+        #clock div{
+            float: left;
+            width: 80px;
+        }
+        #clock div::after{
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        #clock div>span{
+            position: relative;
+            top: 0;
+            float: left;
+            width: 40px;
+        }
+        #clock div>span.move{
+            top: -60px;
+            transition: .5s;
+        }
+        #clock div>span span{
+            display: block;
+            width: 40px;
+            height: 60px;
+            font-size: 40px;
+            text-align: center;
+            line-height: 60px;
+            color: #fff;
+            background: linear-gradient(#000 50%,#333 50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <div>
+            <span>
+                <span class="pravTime">0</span>
+                <span class="nowTime">0</span>
+            </span>
+            <span>
+                <span class="pravTime">0</span>
+                <span class="nowTime">0</span>
+            </span>
+        </div>
+        <b>:</b>
+        <div>
+            <span>
+                <span class="pravTime">0</span>
+                <span class="nowTime">0</span>
+            </span>
+            <span>
+                <span class="pravTime">0</span>
+                <span class="nowTime">0</span>
+            </span>
+        </div>
+        <b>:</b>
+        <div>
+            <span>
+                <span class="pravTime">0</span>
+                <span class="nowTime">0</span>
+            </span>
+            <span>
+                <span class="pravTime">0</span>
+                <span class="nowTime">0</span>
+            </span>
+        </div>
+    </div>
+    <script>
+        (function(){
+        //     let nowTime = [...document.querySelectorAll("#clock .nowTime")],
+        //         prevTime = [...document.querySelectorAll("#clock .pravTime")],
+        //         effectBox = document.querySelectorAll("#clock div>span"),
+        //         timeArr,
+        //         lastTimeArr 
+        //         ;
+        //     function getTime(){
+        //         let Time = new Date(),
+        //             hour = Time.getHours() < 10 ? "0" + Time.getHours() : Time.getHours() + "",
+        //             minutes = Time.getMinutes() < 10 ? "0" + Time.getMinutes() : Time.getMinutes() + "",
+        //             second = Time.getSeconds() < 10 ? "0" + Time.getSeconds() : Time.getSeconds() + "";
+        //         timeArr = (hour + minutes + second).split("");
+        //     }
+        //     getTime();
+
+        //     function show(){   
+        //         prevTime.forEach((ele,index)=> {
+        //             lastTimeArr = timeArr;
+        //             ele.innerHTML = lastTimeArr[index];
+        //         });
+        //         return function() {
+        //             getTime();
+        //             nowTime.forEach((ele,index)=> {
+        //                 if(timeArr[index] === lastTimeArr[index]) return;
+        //                 ele.innerHTML = timeArr[index];
+        //                 lastTimeArr[index] = timeArr[index];
+        //                 effectBox[index].classList.add("move");
+        //                 setTimeout(() => {
+        //                     prevTime[index].innerHTML = ele.innerHTML;
+        //                     effectBox[index].classList.remove("move"); 
+        //                 }, 500);
+        //             });
+        //         }
+        //     }
+        //    setInterval(show(), 1000);  
+        let nowTime = [...document.querySelectorAll("#clock .nowTime")];
+            let prevTime = [...document.querySelectorAll("#clock .pravTime")];
+            let effectBox = document.querySelectorAll("#clock div>span");
+
+            function getTimeString() {
+                let date = new Date();
+                let hours = date.getHours();
+                let minutes = date.getMinutes();
+                let seconds = date.getSeconds();
+                return [Math.floor(hours / 10), hours % 10, 
+                        Math.floor(minutes / 10), minutes % 10,
+                        Math.floor(seconds / 10), seconds % 10];
+            }
+
+            function initialize() {
+                let currentTime = getTimeString();
+                prevTime.forEach((ele, index) => {
+                    ele.innerHTML = currentTime[index];
+                });
+                nowTime.forEach((ele, index) => {
+                    ele.innerHTML = currentTime[index];
+                });
+                return currentTime;
+            }
+
+            let lastTime = initialize();
+
+            setInterval(function() {
+                let currentTime = getTimeString();
+                nowTime.forEach((ele, index) => {
+                    ele.innerHTML = currentTime[index];
+                    if (lastTime[index] != currentTime[index]) {
+                        effectBox[index].classList.add("move");
+                    }
+                });
+                setTimeout(() => {
+                    prevTime.forEach((ele, index) => {
+                        ele.innerHTML = currentTime[index];
+                        effectBox[index].classList.remove("move");
+                        lastTime = currentTime;
+                    });
+                }, 500);
+            }, 1000);
+        })()
+    </script>
+</body>
+</html>

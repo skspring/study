@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            margin: 100px auto 0;
+            padding: 20px;
+            width: 600px;
+            background: #4595ff;
+        }
+        #wrap textarea{
+            margin-top: 5px;
+            padding: 0;
+            width: 100%;
+            height: 100px;
+            outline: none;
+            border: none;
+            resize: none;
+        }
+        #wrap .sendBtn{
+            width: 15%;
+            height: 20px;
+            font-size: 12px;
+            line-height: 20px;
+            text-align: center;
+            background: pink;
+            user-select: none;
+            cursor: pointer;
+        }
+        .msgList{
+            box-sizing: border-box;
+            margin-top: 5px;
+            padding: 10px;
+            width: 100%;
+            height: 300px;
+            overflow-y: auto;
+            background: #fff;
+        }
+        .msgList li{
+            margin-top: 10px;
+            font-size: 16px;
+            line-height: 16px;
+        }
+        .msgList li p{
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .msgList li p span{
+            margin-right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul class="msgList"></ul>
+        <textarea name="haha" id="" cols="30" rows="10" value ="haha"></textarea>
+        <div class="sendBtn">发送</div>
+        
+    </div>
+    <script>
+        (function(){
+            let inputText = document.querySelector("#wrap textarea"),
+                sendBtn = document.querySelector(".sendBtn"),
+                msgList = document.querySelector(".msgList"),
+                msgHtml = "",
+                nowTime = ""
+                ;
+            function getTime(){
+                let time = new Date(),
+                    hour = time.getHours(),
+                    min = time.getMinutes(),
+                    sec = time.getSeconds()
+                    ;
+                if(hour<10)hour = "0" + hour;
+                if(min<10)min = "0" + min;
+                if(sec<10)sec = "0" + sec;
+                nowTime = `${hour}:${min}:${sec}`;
+            }
+            function updateMsg(){
+                inputText.value = inputText.value.split(">").join("&gt");
+                inputText.value = inputText.value.split("<").join("&lt");
+                msgHtml += `<li><p><span>奎爷</span>${nowTime}</p>${inputText.value}</li>`;
+                msgList.innerHTML = msgHtml;
+                inputText.value = "";
+                msgList.scrollTop = msgList.scrollHeight;
+            }
+            sendBtn.onclick = function() {
+                if(inputText.value){
+                    getTime();
+                    updateMsg();
+                }
+            };
+        })()
+    </script>
+</body>
+</html>

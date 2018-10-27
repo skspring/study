@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>天猫侧边栏</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <link rel="stylesheet" type="text/css" href="./iconfont/iconfont.css">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #toolBar{
+            position: fixed;
+            right: -36px;
+            width: 36px;
+            background: #000;
+            user-select: none;
+            transition: .3s;
+        }
+        #toolBar.active{
+            right: 0;
+        }
+        #toolBar ul li{
+            position: relative;
+            margin-bottom: 10px;
+            width: 100%;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        #toolBar ul li:hover{
+            background: #ff0036;
+        }
+        #toolBar .btnList li:nth-child(1){
+            margin-bottom: 120px;
+        }
+        #toolBar  .shoppingCart{
+            position: fixed;
+            top: 30%;
+            right: 0;
+            width: 36px;
+            height: 109px;
+            text-align: center;
+            background-color: #000; 
+            cursor: pointer;
+        }
+        #toolBar  .shoppingCart:hover{
+            background: #ff0036;
+        }
+        #toolBar .shoppingCart span{
+            display: block;
+            box-sizing: border-box;
+            margin: 0 auto;
+            padding: 10px 5px;
+            width: 30px;
+            line-height: 20px;
+            color: #fff;
+            font-size: 12px;
+            border-top: 2px solid #333;
+            border-bottom: 2px solid #333;
+        }
+        #toolBar .shoppingCart span i{
+            font-size: 24px;
+            color: red;
+        }
+        #toolBar .shoppingCart:hover span i{
+            color: #fff;
+        }
+        .bottomBtn{
+            position:absolute;
+            bottom: 5px;
+            width: 36px;
+        }
+        #toolBar ul li .lab{
+            position: absolute;
+            top: 0;
+            left: -120px;
+            width: 100px;
+            height: 36px;
+            font-size: 12px;
+            text-align: center;
+            background: #333;
+            visibility: hidden;
+            opacity: 0;
+            transition: .3s;
+        }
+        #toolBar ul li:hover .lab{
+            visibility: visible;
+            left: -100px;
+            opacity: 1;
+        }
+        .lab:after{
+            content: "";
+            position: absolute;
+            top: 7px;
+            right: -20px;
+            border: 10px solid #333;
+            border-top-color: transparent;
+            border-bottom-color: transparent;
+            border-right-color: transparent;
+        }
+        .code{
+            position: absolute;
+            bottom: -20px;
+            left: -175px;
+            box-sizing: border-box;
+            padding-top: 40px; 
+            width: 155px;
+            height: 207px;
+            background: url("./images/code-bg.png") no-repeat center;
+            transition: .3s;
+            visibility: hidden;
+            opacity: 0;
+        }
+        ul li:hover .code{
+            left: -155px;
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div id="toolBar">
+        <ul class="btnList">
+            <li class="iconfont icon-pinpaibiaoshi-tianmao"><span class="lab">会员权益</span></li>
+            <li class="iconfont icon-qianqian-"><span class="lab">我的资产</span></li>
+            <li class="iconfont icon-shoucang"><span class="lab">我的收藏</span></li>
+            <li class="iconfont icon-lishijilu"><span class="lab">我看过的</span></li>
+            <li class="iconfont icon-chongzhi0101"><span class="lab">我要充值</span></li>
+        </ul>
+        <div class="shoppingCart">
+            <span><i class="iconfont icon-gouwuche"></i>购物车</span>
+        </div>
+        <ul class="bottomBtn">
+            <li class="iconfont icon-tubiaolunkuo-"><span class="lab">用户反馈</span></li>
+            <li class="iconfont icon-erweima">
+                <div class="code">
+                    <img src="./images/tmCode.jpg" alt="" width="120" height="120">
+                    <img src="./images/TB1zVjagNtnkeRjSZSgXXXAuXXa-135-45.png" alt="">
+                </div>
+            </li>
+            <li class="iconfont icon-fanhuidingbu3"><span class="lab">返回顶部</span></li>
+        </ul>
+    </div>
+    <script>
+        (function(){
+            let toolBar = document.querySelector("#toolBar"),
+                btnList = document.getElementsByClassName("btnList")[0],
+                shoppingCart = document.getElementsByClassName("shoppingCart")[0];
+                
+            function autoHeight() {
+                toolBar.style.height = document.documentElement.clientHeight + "px";
+                btnList.style.marginTop = (document.documentElement.clientHeight * 0.3 - 40) + "px";
+            }
+            autoHeight();   
+            window.onresize = function () {
+                autoHeight();
+            };
+            shoppingCart.onmouseenter = function () {
+                toolBar.classList.add("active");
+            };
+            toolBar.onmouseleave = function () {
+                toolBar.classList.remove("active");
+            };
+        }()) 
+    </script>
+</body>
+</html>

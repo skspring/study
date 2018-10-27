@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #box{
+            margin: 50px auto;
+            border: 1px solid red;
+        }
+        #box:after{
+            content: '';
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        #box div{
+            float: left;;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+            line-height: 50px;
+            background: #abcdef;
+        }
+        #control{
+            text-align: center;
+        }
+        #control span{
+            display: inline-block;
+            margin: 5px;
+            width: 100px;
+            height: 50px;
+            background: #333;
+            color: #fff;
+            line-height: 50px;
+            text-align: center;
+            user-select: none;
+            cursor: pointer;
+        }      
+    </style>
+</head>
+<body>
+    <div id="box">
+    </div>
+    <div id="control">
+        <span>下尖框</span><span>上尖框</span>
+    </div>
+    <script>
+        let oBox = document.getElementById("box"),
+            aBtns = document.querySelectorAll("#control span"),
+            mid = 0,
+            isDirection = false,
+            boxNum = 9;   
+        mid = boxNum % 2 ? (boxNum - 1) / 2 : boxNum / 2;
+        oBox.style.width = `${(boxNum +1 )*50}px`;
+        function updataBtn () {
+            aBtns[0].style.background = isDirection ? "blue" : "#333";
+            aBtns[1].style.background = isDirection ? "#333" : "blue";
+        }
+        function updateBox () {
+            let html = "";
+            for (var i = 0; i <= boxNum; i++) {
+                if (isDirection) {
+                    var j = i <= mid ? i  : (boxNum - i) ;
+                } else {
+                    var j = i <= mid ? (mid - i)  : (mid - (boxNum -i) ) ; 
+                };
+                html += `<div style = "margin-top:${j * 50}px;">${i}</div>`;  
+            }
+            oBox.innerHTML = html;          
+        }
+        updataBtn ();
+        updateBox ();
+        aBtns[0].onclick = function () {
+            isDirection = true;
+            updataBtn();
+            updateBox();
+        }
+        aBtns[1].onclick = function () {
+            isDirection = false;
+            updataBtn();
+            updateBox();
+        } 
+    </script>
+</body>
+</html>

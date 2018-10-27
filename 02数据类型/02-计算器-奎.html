@@ -1,0 +1,200 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            position: relative;
+            box-sizing: border-box;
+            margin: 100px auto 0;
+            padding: 10px;
+            width: 600px;
+            border: 1px solid #000;
+            user-select: none;
+        }
+        #wrap:after{
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        #wrap .showArea{
+            margin-bottom: 10px;
+            width: 100%;
+            height: 80px;
+            font-size: 60px;
+            line-height: 80px;
+            background: #ccc;
+            text-align: right;
+        }
+        #wrap .numberBtn{
+            float: left;
+            width: 80%;
+        }
+        #wrap .numberBtn:after{
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        #wrap .numberBtn li{
+            float: left;
+            margin: 5px;
+            width: 30%;
+            height: 100px;
+            font-size: 50px;
+            text-align: center;
+            line-height: 100px;
+            background: #ddd;
+            cursor: pointer;
+        }
+        #wrap .countBtn{
+            position: relative;
+            float: right;
+            width: 20%;
+        }
+        #wrap .countBtn li{
+            margin: 5px 0;
+            width: 100%;
+            height: 75px;
+            font-size: 50px;
+            line-height: 75px;
+            text-align: center;
+            background: #ddd;
+            cursor: pointer;
+        }
+        #wrap .countBtn li:nth-child(5){
+            position: absolute;
+            left: -160px;
+            bottom: -115px;
+            width: 270px;
+            height: 100px;
+            line-height: 100px;
+        }
+        #wrap span{
+            position: absolute;
+            left: 10px;
+            top: 58px;
+            width: 100px;
+            height: 30px;
+            color: red;
+            line-height: 40px;
+            text-align: left;
+            font-size: 30px;
+        }
+        #wrap li:hover{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="showArea">0
+        </div>
+        <span class="count"></span>
+        <ul class="numberBtn">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>0</li>
+            <li>.</li>
+        </ul>
+        <ul class="countBtn">
+            <li>+</li>
+            <li>-</li>
+            <li>×</li>
+            <li>/</li>
+            <li>=</li>
+        </ul>
+    </div>
+    <script>
+        (function(){
+            let showArea = document.querySelector(".showArea"),
+                numberBtn = document.querySelectorAll(".numberBtn li"),
+                countBtn = document.querySelectorAll(".countBtn li"),
+                showCount = document.querySelector("#wrap span"),
+                numFirst = 0,
+                numSecond = 0,
+                tempInt = 0,
+                tempFloat = "",
+                count = "",
+                rasult = 0,
+                isClickCbtn = false,
+                isClickPoint = false
+                ;
+            //当小数点被点击过，记录为true
+            numberBtn[numberBtn.length-1].onclick = function(){
+                isClickPoint = true;
+            };
+            //数字键盘点击事件
+            for(let i = 0; i < numberBtn.length-1; i++){
+                numberBtn[i].onclick = function() {
+                    if(!isClickPoint){
+                        tempInt += numberBtn[i].innerHTML;//如果isClickPoint为假，点击为整数位的数字
+                    } else{
+                        tempFloat += numberBtn[i].innerHTML;//如果isClickPoint为真，点击为小数点的数字
+                    }
+                    if(!isClickCbtn){
+                        numFirst = parseFloat(tempInt + "." + tempFloat);//如果isClickCbtn 为假，点击数字按钮赋值给NUM1
+                    } else{
+                        numSecond = parseFloat(tempInt + "." + tempFloat);//如果isClickCbtn为真，点击数字按钮赋值给NUM2
+                    }
+                    showArea.innerHTML = tempFloat ? parseFloat(tempInt) +  "." + tempFloat : showArea.innerHTML = parseFloat(tempInt);
+                }
+            }
+            // 运算符点击事件
+            for(let i = 0; i < countBtn.length-1; i++){
+                countBtn[i].onclick = function() {
+                    isClickCbtn = true;          //记录已点击，后续点击数字按钮赋值给NUM2
+                    isClickPoint = false;         //小数点还原 
+                    tempInt = 0;
+                    tempFloat = "";
+                    count = countBtn[i].innerHTML;
+                    showCount.innerHTML = count;
+                }
+            }
+            //等号点击事件
+            countBtn[4].onclick = function(){
+                switch(count){
+                    case "+":
+                        rasult = numFirst + numSecond;
+                        break;
+                    case "-":
+                        rasult = numFirst - numSecond;
+                        break;
+                    case "×":
+                        rasult = numFirst * numSecond;
+                        break;
+                    case "/":
+                        rasult = numFirst / numSecond;
+                        break;
+                }
+                showArea.innerHTML = rasult;
+                numFirst = rasult;
+                numSecond = 0;
+                count = "";
+                tempInt = 0;
+                tempFloat = "";
+                showCount.innerHTML = count;
+            }
+            //还需优化，代码过于复杂
+        })()
+    </script>
+</body>
+</html>

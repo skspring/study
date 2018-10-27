@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #content{
+            outline: 1px solid red;
+        }
+        #content #mulTable{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #content #mulTable span{
+            display: inline-block;
+            margin: 5px;
+            padding: 5px;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            outline: 1px solid black;
+        }
+        #factorial{
+            margin-top: 50px;
+        }
+        #factorial div span{
+            display: inline-block;
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+        p span{
+            color: red;
+        }
+        .wipeN p span{
+            margin: 3px;
+            padding: 2px;
+            border: 1px solid #000;
+        }
+        .chessboard ul{
+            width: 320px;
+            height: 40px;
+        }
+        .chessboard li{
+            box-sizing: border-box;
+            float: left;
+            width: 40px;
+            height: 40px;
+            border: 1px solid #000;
+        }
+        .chessboard li.active{
+            background: red;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="content">
+        <ul id="mulTable">
+        </ul>
+    </div>
+    <div id="factorial">
+        请输入一个数字
+        <input type="text">
+        <button>打印阶乘</button>
+        <button>打印1000内  水仙数</button>
+        <div></div>
+    </div>
+    <p></p>
+    <div class="wipeN">
+        <span>请输入数字m</span>
+        <input type="text">
+        <span>输入数字n</span>
+        <input type="text">
+        <button>打印结果</button>
+        <p></p>
+    </div>
+    <div class="chessboard">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <div class="max">
+
+    </div>
+    <script>
+        //乘法表
+        function mul(){
+            let mulTable = document.getElementById("mulTable");  
+            for(var row = 1; row <= 9; row++) {
+                mulTable.innerHTML += "<li></li>";
+                let rowTable = document.querySelectorAll("#mulTable li");
+                for(var column = 1; column <= row; column++) {
+                    rowTable[row - 1].innerHTML += "<span>" + column + "x" + row + "=" + column*row + "</span>";
+                }         
+            };
+        }
+        mul();
+        
+        function Fn() {
+            let factorial = document.querySelector("#factorial div");
+            let input = document.querySelector("#factorial input");
+            let btn = document.querySelectorAll("#factorial button");
+            //阶乘
+            btn[0].onclick = function(){
+                let html = "";
+                let num = input.value;
+                num = num * 1;
+                if(num){
+                    for(let i = num - 1; i > 0 ; i--){
+                        html += `<span>${num} * ${i} = ${num * i}</span>`;
+                    }
+                }else{
+                    alert("输入正确数字");
+                }
+                
+                factorial.innerHTML = html;
+            };
+            // 打印水仙数   
+            btn[1].onclick = function() {
+                let html = "";
+                let temp1 = 0;
+                let temp2 = 0;
+                for(let a = 0; a < 10; a++){
+                    for(let b = 0; b < 10; b++){
+                        for(let c = 0; c < 10; c++){
+                            temp1 = a*a*a + b*b*b + c*c*c;
+                            temp2 = a*100 + b*10 + c;
+                            if(temp1 === temp2){
+                                html += `<span>${temp1}</span>`;
+                                factorial.innerHTML = html;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+        Fn();
+        //小鸡数学
+        function chicken() {
+            let chickenNum = document.querySelector("p");
+            for(let a = 0; a*5 < 100; a++){
+                for(let b = 0; b*3 < 100; b++){
+                    for(let c = 0; c/3 < 100; c++){
+                        let temp1 = a + b + c;
+                        let temp2 = a*5 + b*3 + c/3
+                        if(temp2 === 100 && temp1 === 100){
+                            chickenNum.innerHTML += `公鸡<span>${a}</span>母鸡<span>${b}</span>小鸡<span>${c}</span></br>`
+                        }    
+                    }
+                }
+            }
+        }
+        chicken();
+
+        //去除m含有N的 方法
+        function wipeN() {
+            let num = document.querySelectorAll(".wipeN input");
+            let btn = document.querySelector(".wipeN button");
+            let oP = document.querySelector(".wipeN p");
+            
+            btn.onclick = function(){
+                let m = num[0].value*1;
+                let n = num[1].value*1;
+                oP.innerHTML = "";
+                if(m && n){
+                    if(n < 10 && n > 0){
+                        for(let i = 1; i <= m; i++) {
+                            if(i % n === 0)continue;
+                            if(contain(i,n))continue;
+                            oP.innerHTML += `<span>${i}</span>`
+                        }
+                    }else{
+                        alert("N只能是1到10之间")
+                    }   
+                }else{
+                    alert("请正确输入数字")
+                }
+            }
+            function contain(i,n){
+                while(i > 0){
+                    if(i % 10  === n) return true;
+                    i = (i - i % 10) / 10;
+                    if (i === n) return true;
+                }
+                return false;
+            }
+
+        }
+        wipeN();
+        
+        //点灯
+        function chessBoard(){
+            let chess = [...document.querySelectorAll(".chessboard li")];
+                isActive = [];
+            chess.forEach((ele,index) => {
+                ele.onclick = function(){
+                    updateChess(index);
+                    updateChess(index - 1);
+                    updateChess(index + 1);
+                    updateChess(index + 8);
+                    updateChess(index - 8);
+                    if(index % 8 === 0){
+                        updateChess(index - 1);
+                    }
+                    if((index + 1) % 8 === 0){
+                        updateChess(index + 1);
+                    }
+                } 
+                function updateChess(index){
+                    if(index < 0 || index > chess.length - 1)return;
+                    if(!isActive[index]){
+                        chess[index].classList.add("active");
+                        isActive[index] = true;
+                    }else{
+                        chess[index].classList.remove("active");
+                        isActive[index] = false;
+                    }
+                }
+            });
+        }
+        chessBoard();
+
+        //数组中选出n个最大的
+
+        function max(){
+            let arr = new Array(10000).fill(1).map((i,j)=>i+j).sort(()=>Math.random()-.5);
+            let temp = 0;
+            let newArr = [];
+            let index = 0;
+            while(index < 5){
+                for(let i = 0; i < arr.length-1; i++) {
+                    if(temp < arr[i] ){
+                        temp = arr[i]
+                    } 
+                }
+                newArr[index] = temp;
+                index ++;
+            }
+            console.log(newArr)
+            
+        }
+        max();
+    </script>
+</body>
+</html>

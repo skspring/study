@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #trainingFirst{
+            margin: 100px auto;
+            padding: 20px;
+            width: 200px;
+            height: 100px;
+            border: 1px solid #000;
+        }
+        #trainingFirst div{
+            display: inline-block;
+            width: 95px;
+            height: 100px;
+            outline: 1px solid #000;
+        }
+        #trainingSecond{
+            margin: 0 auto;
+            width: 200px;
+            height: 100px;
+            text-align: center;
+            background: #fff;
+            border: 1px solid #000;
+        }
+        #trainingSecond p{
+            font-size: 40px;
+            line-height: 100px;
+            color: #fff;
+        }
+    </style>
+    
+</head>
+<body>
+    <div id="trainingFirst">
+        <div></div>
+        <div></div>
+    </div>
+    <div id="trainingSecond">
+    </div>
+    <script>
+        var aBoxs = document.querySelectorAll("#trainingFirst div"),
+            oBox = document.getElementById("trainingSecond")
+        ;
+        aBoxs[0].onclick = function(){
+            this.style.background = "green";
+            aBoxs[1].style.background = "red";
+        };
+        aBoxs[1].onclick = function(){
+            this.style.background = "green";
+            aBoxs[0].style.background = "red";
+        };
+        oBox.onclick = function(){
+            this.innerHTML = "<p>我是菜鸡</p>";
+            this.style.background = "#000";
+            this.style.transition = ".5s";
+        };
+    </script>
+</body>
+</html>

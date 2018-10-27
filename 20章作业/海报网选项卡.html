@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>海报网选项卡</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            margin: 50px 0;
+            min-width: 1100px;
+            user-select: none;
+        }
+        #wrap .plot{
+            margin: 0 auto;
+            width: 1080px;
+            height: 395px;
+        }
+        #wrap .plot .splitLine{
+            margin-bottom: 10px;
+            width: 100%;
+            height: 7px;
+            background: url("./images/line.png") no-repeat;
+        }
+        #wrap .plot .splitLine:nth-child(3){
+            margin-top: 330px;
+        }
+        .plot .title{
+            position: relative;
+            width: 100%;
+            height: 40px;
+            background: #f5f5f5;
+        }
+        .plot .title h2{
+            position: relative;
+            float: left;
+            display: inline-block;
+            width: 132px;
+            height: 40px;
+            color: #fff;
+            font-size: 14px;
+            text-align: center;
+            font-weight: 400;
+            line-height: 40px;
+            background: #000;
+        }
+        .plot .title h2:after{
+            content: "";
+            position: absolute;
+            top: 12px;
+            right: -16px;
+            border: 8px solid #000;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+        }
+        .plot .title ul:after{
+            content: "";
+            display: block;
+            height: 0;
+            clear: both;
+            overflow: hidden;
+        }
+        .plot .title ul li{
+            float: left;
+            margin-left: 30px;
+            height: 40px;
+        }
+        .plot .title ul li>a{
+            position: relative;
+            display: inline-block;
+            color: #000;
+            font-size: 14px;
+            line-height: 40px;
+            transition: .5s;
+        }
+        .plot .title li>a:hover{
+            color: #db3a45;
+        }
+        .plot .title li>a:after{
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 0;
+            height: 2px;
+            background: #db3a45;
+            transition: .3s;
+            transform-origin: center;
+        }
+        .plot .title ul li>a.active:after{
+            width: 100%;
+        }
+        .plot .lable .picArea{
+            position: absolute;
+            top: 60px;
+            left: 0;
+            display: flex;
+            width: 1080px;
+            height: 300px;
+            justify-content: space-between;
+            visibility: hidden;
+        }
+        .plot .lable .picArea.active{
+            visibility: visible;
+        }
+        .plot .lable .picArea>div{
+            width: 340px;
+            height: 100%;
+        }
+        .lable .picArea>div p{
+            margin: 10px 0;
+            width: 100%;
+            height: 18px;
+            font-size: 14px;
+            color: #000;
+            overflow: hidden;
+        }
+        .lable .picArea>div p:hover{
+            color: #db3a45;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div class="plot">
+            <div class="splitLine"></div>
+            <div class="title">
+                <h2>独家精品策划</h2>
+                <ul class="lable">
+                    <li>
+                        <a href="" class="active">全部</a>
+                        <div class="picArea active">
+                            <div>
+                                <a href="" title="潮我看齐：罗志祥携手CTO男团">
+                                    <img src="./images/all/1.jpg" alt="" width="340" height="256">
+                                    <p>潮我看齐：罗志祥携手CTO男团</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="2019春夏巴黎时装周">
+                                    <img src="./images/all/2.jpg" alt="" width="340" height="256">
+                                    <p>2019春夏巴黎时装周</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="搭配速成班：宋轶亲身教你3种心机约会装！">
+                                    <img src="./images/all/3.jpg" alt="" width="340" height="256">
+                                    <p>搭配速成班：宋轶亲身教你3种心机约会装！</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">时装周</a>
+                        <div class="picArea">
+                            <div>
+                                <a href="" title="2019春夏巴黎时装周">
+                                    <img src="./images/2/1.jpg" alt="" width="340" height="256">
+                                    <p>2019春夏巴黎时装周</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="2019春夏米兰时装周">
+                                    <img src="./images/2/2.jpg" alt="" width="340" height="256">
+                                    <p>2019春夏米兰时装周</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="London2019">
+                                    <img src="./images/2/3.jpg" alt="" width="340" height="256">
+                                    <p>London2019</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">潮我看齐</a>
+                        <div class="picArea">
+                            <div>
+                                <a href="" title="潮我看齐：罗志祥携手CTO男团">
+                                    <img src="./images/3/1.jpg" alt="" width="340" height="256">
+                                    <p>潮我看齐：罗志祥携手CTO男团</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="潮我看齐之马思纯，难道只用简单笑容就治愈了我？">
+                                    <img src="./images/3/2.jpg" alt="" width="340" height="256">
+                                    <p>潮我看齐之马思纯，难道只用简单笑容就治愈了我？</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="潮我看齐：果汁女孩文咏珊">
+                                    <img src="./images/3/3.jpg" alt="" width="340" height="256">
+                                    <p>潮我看齐：果汁女孩文咏珊</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">搭配速成班</a>
+                        <div class="picArea">
+                            <div>
+                                <a href="" title="搭配速成班：宋轶亲身教你3种心机约会装！">
+                                    <img src="./images/4/1.jpg" alt="" width="340" height="256">
+                                    <p>搭配速成班：宋轶亲身教你3种心机约会装！</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="搭配速成班：520恋爱系CP搭">
+                                    <img src="./images/4/2.jpg" alt="" width="340" height="256">
+                                    <p>搭配速成班：520恋爱系CP搭</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="搭配速成班：文艺少女郑能量的荷兰之旅">
+                                    <img src="./images/4/3.jpg" alt="" width="340" height="256">
+                                    <p>搭配速成班：文艺少女郑能量的荷兰之旅</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">恋物趣</a>
+                        <div class="picArea">
+                            <div>
+                                <a href="" title="恋物趣vol.13：一把神奇“信物”，开启人生无限可能">
+                                    <img src="./images/5/1.jpg" alt="" width="340" height="256">
+                                    <p>恋物趣vol.13：一把神奇“信物”，开启人生无限可能</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="恋物趣vol.11：我陪你走过最浪漫的路就是爱情的套路">
+                                    <img src="./images/5/2.jpg" alt="" width="340" height="256">
+                                    <p>恋物趣vol.11：我陪你走过最浪漫的路就是爱情的套路</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="恋物趣_ IWC万国表达文西女士腕表：女生们的时髦与品位全在这块腕表上！">
+                                    <img src="./images/5/3.jpg" alt="" width="340" height="256">
+                                    <p>恋物趣_ IWC万国表达文西女士腕表：女生们的时髦与品位全在这块腕表上！</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="">谁最有范</a>
+                        <div class="picArea">
+                            <div>
+                                <a href="" title="「谁最有范」之莫文蔚">
+                                    <img src="./images/6/1.jpg" alt="" width="340" height="256">
+                                    <p>「谁最有范」之莫文蔚</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="「谁最有范」之春夏，灵动之气的耿直girl">
+                                    <img src="./images/6/2.jpg" alt="" width="340" height="256">
+                                    <p>「谁最有范」之春夏，灵动之气的耿直girl</p>
+                                </a>
+                            </div>
+                            <div>
+                                <a href="" title="「谁最有范」跟戚薇学穿搭打赢新年第一仗">
+                                    <img src="./images/6/3.jpg" alt="" width="340" height="256">
+                                    <p>「谁最有范」跟戚薇学穿搭打赢新年第一仗</p>
+                                </a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="splitLine"></div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            let aLable = document.querySelectorAll(".lable li>a"),
+                aPicArea = document.querySelectorAll(".picArea"),
+                len = aLable.length,
+                index = 0;
+                
+            function picUpdata() {
+                for(let i = 0; i < len; i++){
+                    aLable[i].classList.remove("active");
+                    aPicArea[i].classList.remove("active");
+                }
+                aLable[index].classList.add("active");
+                aPicArea[index].classList.add("active");
+            }
+            for(let i = 0; i < len; i++) {
+                aLable[i].onmouseenter = function () {
+                    index = i;
+                    picUpdata();
+                };
+            }
+        })()
+    </script>
+</body>
+</html>

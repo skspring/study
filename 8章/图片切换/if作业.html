@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #pbox{
+            margin:100px auto 0;
+            width:600px;
+            
+            outline: 1px solid red;
+        }
+        #pic{
+            position: relative;
+            width:100%;
+            height: 300px;
+        }
+        #pbox #pic div{
+            position: absolute;
+            top:100px;
+            width: 50px;
+            height: 100px;
+            background: #000;
+        }
+        #pbox #pic #rbtn{
+            right: 0;
+        }
+        #pbox #pic #labnum{
+            position: absolute;
+            top: 0;
+            left:0;
+            right: 0;
+            margin: auto;
+            width: 120px;
+            height: 30px;
+            color:#fff;
+            text-align: center;
+            line-height: 30px;
+            background: rgba(0, 0, 0, .5)
+        }
+        #normal , #loop{
+            display: inline-block;
+            margin:20px auto;
+            width:100px;
+            height: 50px;
+            background:#ccc;
+            text-align: center;
+            line-height: 50px;      
+        }
+        #normal{
+            background:red;
+        }
+        #pic img{
+            display: none;
+            position:absolute;
+            top:0;
+            left:0;
+            width:600px;
+            height: 300px;
+        }
+        #pic img:nth-child(1){
+            display: block;
+        }
+        
+    </style>
+</head>
+<body>
+    <div id="pbox">
+        <div id="pic"> 
+            <img src="./images/1.jpg" alt="">
+            <img src="./images/2.jpg" alt="">
+            <img src="./images/3.jpg" alt="">
+            <img src="./images/4.jpg" alt="">
+            <img src="./images/5.jpg" alt="">
+            <p id="labnum">
+                1/5
+            </p>
+            <div id="lbtn"></div>
+            <div id="rbtn"></div>
+        </div>
+        <div id="normal">正常模式</div>
+        <div id="loop">循环模式</div>
+    </div>
+    <script>
+        /*let lBtn = document.getElementById("lbtn"),
+            rBtn = document.getElementById("rbtn"),
+            oPic = document.getElementById("pic"),
+            oNum = document.getElementById("labnum"),
+            oNormal = document.getElementById("normal"),
+            oLoop = document.getElementById("loop"),
+            i = 1,
+            mode = false,
+            oImg = document.querySelectorAll("#pbox #pic img");
+            
+            oNormal.onclick = function() {
+                oNormal.style.background = "red";
+                oLoop.style.background = "#ccc" ;
+                mode = false;
+            };
+            oLoop.onclick = function() {
+                oNormal.style.background = "#ccc";
+                oLoop.style.background = "red" ;
+                mode = true;
+            };
+            rBtn.onclick = function() {
+                if(i < 5) {
+                    i++;
+                    oNum.innerHTML = i + "/5";
+                } else {
+                    if(mode) {
+                        i = 1;
+                        oNum.innerHTML = i + "/5";
+                        oImg[4].style.display="none";
+                    }
+                }
+                oImg[(i - 1)].style.display="block";
+                oImg[(i - 2 + 5) % 5].style.display="none";
+                   
+            };
+            lBtn.onclick = function() {
+                if(i > 1) {
+                    i--;
+                    oNum.innerHTML = i + "/5";
+                } else {
+                    if(mode) {
+                        i = 5;
+                        oNum.innerHTML = i + "/5";
+                    }
+                }
+                oImg[(i - 1)].style.display="block";
+                oImg[i % 5].style.display="none";
+            };  */
+        let prevBtn = document.getElementById("lbtn"),
+            nextBtn = document.getElementById("rbtn"),
+            currentImage = document.getElementById("pic"),
+            numberLabel = document.getElementById("labnum"),
+            normalBtn = document.getElementById("normal"),
+            loopBtn = document.getElementById("loop"),
+            index = 0,
+            numOfImage = 5,
+            isLoop = false,
+            images = document.querySelectorAll("#pbox #pic img");
+
+        function updateImage() {
+            for (var k = 0; k < numOfImage; k++) {
+                images[k].style.display = "none";
+            }
+            images[index].style.display = "block";
+            numberLabel.innerHTML = (index + 1) + "/" + numOfImage;
+        }
+
+        normalBtn.onclick = function() {
+            normalBtn.style.background = "red";
+            loopBtn.style.background = "#ccc" ;
+            isLoop = false;
+        };
+
+        loopBtn.onclick = function() {
+            normalBtn.style.background = "#ccc";
+            loopBtn.style.background = "red" ;
+            isLoop = true;
+        };
+
+        nextBtn.onclick = function() {
+            index = index + 1;
+            index = isLoop ? index % numOfImage : Math.min(numOfImage - 1, index);
+            updateImage();
+        };
+
+        prevBtn.onclick = function() {
+            index = index - 1;
+            index = isLoop ? (index+numOfImage) % numOfImage : Math.max(0, index);
+            updateImage();
+        };
+    </script>
+</body>
+</html>

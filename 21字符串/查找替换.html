@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            margin: 50px auto;
+            padding: 30px;
+            width: 500px;
+            border: 1px solid #000;
+        }
+        #wrap p{
+            margin-top: 20px;
+            width: 100%;
+            text-indent: 2em;
+        }
+        #wrap p span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <input type="text" id="searchText" placeholder="输入文本内容">
+        <button id="searchBtn">查找</button>
+        <input type="text" id="replaceText"placeholder="输入文本内容">
+        <button id="replaceBtn">替换</button>
+        <p>张家界国家森林公园位于湖南省西北部张家界市境内。1982年9月25日，经中华人民共和国国务院批准，将原来的张家界林场正式命名为“张家界国家森林公园”，也是中国第一个国家森林公园。1992年12月，因奇特的石英砂岩大峰林被联合国列入《世界自然遗产名录》，2004年2月被列入世界地质公园。公园总面积4810公顷。
+                张家界国家森林公园自然风光以峰称奇、以谷显幽、以林见秀。其间有奇峰3000多座，如人如兽、如器如物，形象逼真，气势壮观，有“三千奇峰，八百秀水”之美称。 [1]  主要景点有金鞭溪、袁家界、杨家界等。</p>
+    </div>
+    <script>
+        (function(){
+            let searchText = document.getElementById("searchText"),
+            replaceText = document.getElementById("replaceText"),
+            searchBtn = document.getElementById("searchBtn"),
+            replaceBtn = document.getElementById("replaceBtn"),
+            textLable = document.querySelector("#wrap p"),
+            initialText = textLable.innerHTML;
+        
+            function updataText(searchText,replaceText) {
+                textLable.innerHTML = initialText.split(searchText).join(replaceText);
+                return textLable.innerHTML;
+            }
+            searchBtn.onclick = function() {
+                    if(searchText.value){
+                        updataText(searchText.value,`<span>${searchText.value}</span>`) 
+                    }
+            };
+            replaceBtn.onclick = function() {
+                    if(searchText.value && replaceText.value) {
+                        initialText = updataText(searchText.value,replaceText.value);
+                    }
+                    
+            };
+        })()
+        
+    </script>
+</body>
+</html>

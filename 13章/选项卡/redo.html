@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            margin: 50px auto 0;
+            width: 704px;
+            height: 298px;
+            
+        }
+        #wrap .leftTabs{
+            position: relative;
+            width: 100px;
+        }
+        #wrap .leftTabs>li{
+            margin-bottom: 5px;
+            
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            background: #000;
+            color: #fff;
+            user-select: none;
+            cursor: pointer;
+        }
+        #wrap .leftTabs>li.active{
+            background: orangered;
+            color: #000;
+        }
+        .leftTabs li .showBox{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 100px;
+            width: 604px;
+            height: 298px;
+        }
+        .leftTabs li .showBox.active{
+            display: block;
+        }
+        .showBox .picArea li{
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        .showBox .picArea li.active{
+            display: block;
+        }
+        .showBox .tabs{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
+        .showBox .tabs li{
+            float: left;
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            color: #fff;
+            line-height: 30px;
+            text-align: center;
+            background: rgba(0,0,0,.7);
+
+        }
+        .showBox .tabs li.active{
+            color: #000;
+            background: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul class="leftTabs">
+            <li class="active">豪车
+                <div class="showBox active">
+                    <ul class="picArea">
+                        <li class="active"><img src="./images/car/1.jpg" alt=""></li>
+                        <li><img src="./images/car/2.jpg" alt=""></li>
+                        <li><img src="./images/car/3.jpg" alt=""></li>
+                        <li><img src="./images/car/4.jpg" alt=""></li>
+                        <li><img src="./images/car/5.jpg" alt=""></li>
+                        <li><img src="./images/car/6.jpg" alt=""></li>
+                    </ul>
+                    <ul class="tabs">
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                    </ul>
+                </div>
+            </li>
+            <li>美女
+                <div class="showBox">
+                    <ul class="picArea">
+                        <li class="active"><img src="./images/bitch/1.jpg" alt=""></li>
+                        <li><img src="./images/bitch/2.jpg" alt=""></li>
+                        <li><img src="./images/bitch/3.jpg" alt=""></li>
+                        <li><img src="./images/bitch/4.jpg" alt=""></li>
+                        <li><img src="./images/bitch/5.jpg" alt=""></li>
+                        <li><img src="./images/bitch/6.jpg" alt=""></li>
+                        <li><img src="./images/bitch/7.jpg" alt=""></li>
+                        <li><img src="./images/bitch/8.jpg" alt=""></li>
+                    </ul>
+                    <ul class="tabs">
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                        <li>6</li>
+                        <li>7</li>
+                        <li>8</li>
+                    </ul>
+                </div>
+            </li>
+            <li>游戏
+                <div class="showBox">
+                    <ul class="picArea">
+                        <li class="active"><img src="./images/game/1.jpg" alt=""></li>
+                        <li><img src="./images/game/2.jpg" alt=""></li>
+                        <li><img src="./images/game/3.jpg" alt=""></li>
+                        <li><img src="./images/game/4.jpg" alt=""></li>
+                        <li><img src="./images/game/5.jpg" alt=""></li>
+                    </ul>
+                    <ul class="tabs">
+                        <li class="active">1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+        <script>
+            (function(){
+                let leftTabs = document.querySelectorAll("#wrap .leftTabs>li"),
+                    showBox = document.querySelectorAll(".leftTabs li .showBox"),
+                    leftTabsLen = leftTabs.length,
+                    index = 0;
+
+                function updateSideBar(prevIndex, currentIndex) {
+                    showBox[prevIndex].classList.remove("active");
+                    leftTabs[prevIndex].classList.remove("active");
+                    showBox[currentIndex].classList.add("active");
+                    leftTabs[currentIndex].classList.add("active");
+                }
+                    
+                for (let i = 0; i < leftTabsLen; i++) {
+                    leftTabs[i].onclick = function() {
+                        if(i !== index) {
+                            updateSideBar(index, i);
+                            index = i;    
+                        }
+                    };   
+                    let bottomBtns = showBox[i].querySelectorAll(".tabs > li"),
+                        showImgs = showBox[i].querySelectorAll(".picArea > li"),
+                        len = showImgs.length,
+                        picIndex = 0;   
+                    for (let j = 0; j < len; j++){
+                        bottomBtns[j].onclick = function() {
+                            if(j !== picIndex) {
+                                bottomBtns[j].classList.add("active");
+                                showImgs[j].classList.add("active");
+                                bottomBtns[picIndex].classList.remove("active");
+                                showImgs[picIndex].classList.remove("active");
+                                picIndex = j;
+                            }
+                        }
+                    };
+                }
+            }())
+        </script>
+    </div>
+</body>
+</html>

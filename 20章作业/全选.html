@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>全选反选框</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font: 12px"宋体", "Arial Narrow", HELVETICA;
+            background: #fff;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        img {
+            border: 0;
+            vertical-align: middle;
+        }
+
+        #wrap {
+            margin: 50px auto 0;
+            width: 300px;
+            border: 1px solid #333333;
+            border-radius: 30px;
+        }
+
+        #wrap .list {
+            margin: 50px 0 10px;
+        }
+
+        #wrap li {
+            width: 100%;
+            height: 50px;
+            background: #333;
+            color: #fff;
+            line-height: 50px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #wrap li span {
+            display: inline-block;
+            margin-right: 20px;
+            width: 50px;
+            height: 50px;
+            vertical-align: -20px;
+            background: url("./images/2.jpg") no-repeat center;
+        }
+
+        #wrap li span.checked {
+            margin-right: 0;
+            background: url("./images/1.jpg") no-repeat center;
+        }
+
+        #wrap .btn {
+            display: inline-block;
+            margin: 10px 0 15px 40px;
+            width: 80px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px dotted #000;
+            border-radius: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #wrap .btn span {
+            display: inline-block;
+            width: 40px;
+            height: 30px;
+            vertical-align: -10px;
+            background: url("./images/2.jpg") no-repeat center;
+        }
+
+        #wrap .btn span.checked {
+            background: url("./images/1.jpg") no-repeat center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul class="list">
+            <li><span></span>项目1</li>
+            <li><span></span>项目2</li>
+            <li><span></span>项目3</li>
+            <li><span></span>项目4</li>
+            <li><span></span>项目5</li>
+            <li><span></span>项目6</li>
+            <li><span></span>项目7</li>
+            <li><span></span>项目8</li>
+        </ul>
+        <div class="btn">
+            <span></span>
+            全选
+        </div>
+        <div class="btn">
+
+            反选
+        </div>
+    </div>
+    <script>
+        (function () {
+            let oItems = document.querySelectorAll("#wrap .list li"),
+                oCheckLbl = document.querySelectorAll("#wrap .list li span"),
+                oBtn = document.querySelectorAll("#wrap .btn"),
+                oBtnLbl = document.querySelectorAll("#wrap .btn span"),
+                len = oItems.length,
+                num = 0;
+
+            function checkUpdata(i, bool) { //刷新LI状态
+                if (bool) {
+                    oCheckLbl[i].classList.add("checked");
+                } else {
+                    oCheckLbl[i].classList.remove("checked");
+                }
+            }
+
+            function allCheckedUpdata() { //刷新 全选按钮状态  如全部LI都选中  则全选框激活
+                if (num === len) {
+                    oBtnLbl[0].classList.add("checked");
+                } else {
+                    oBtnLbl[0].classList.remove("checked");
+                }
+            }
+
+            for (let i = 0; i < len; i++) {             //遍历
+                if (i % 2 === 0) { //给Li分层上背景色
+                    oItems[i].style.backgroundColor = "#555";
+                }
+                if (i % 3 === 0) {
+                    oItems[i].style.backgroundColor = "#000";
+                }
+                oItems[i].checked = false; //添加自定义属性，初始全不选中
+                oItems[i].onclick = function () {
+                    this.checked = !this.checked; //选中变量改为非
+                    this.checked ? num++ : num--; //选中数量计算
+                    checkUpdata(i, this.checked);
+                    allCheckedUpdata();
+                };
+
+            }
+            oBtn[0].onclick = function () {
+                num = len;
+                for (let i = 0; i < len; i++) {
+                    oItems[i].checked = true;
+                    checkUpdata(i, oItems[i].checked);
+                    allCheckedUpdata();
+                }
+            };
+            oBtn[1].onclick = function () {
+                num = len - num;
+                for (let i = 0; i < len; i++) {
+                    oItems[i].checked = !oItems[i].checked;
+                    checkUpdata(i, oItems[i].checked);
+                    allCheckedUpdata();
+                }
+            };
+        })()
+    </script>
+</body>
+
+</html>

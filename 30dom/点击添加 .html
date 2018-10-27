@@ -1,0 +1,147 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #content{
+            padding: 50px 0 0;
+            width: 100%;
+            background: linear-gradient(to bottom,#bbbcde , #fdae87);
+            user-select: none;
+        }
+        .wrap{
+            margin: 0 auto;
+            width: 800px;
+            height: 550px;
+        }
+        .wrap>div{
+            float: left;
+            box-sizing: border-box;
+            width: 50%;
+            height: 100%;
+            background: #fff;
+        }
+        .wrap .rightlbl{
+            padding: 50px 30px;
+            background: rgba(0,0,0,.5);
+        }
+        .wrap .leftlbl{
+            padding: 50px 20px;
+            color: orange;
+        }
+        .wrap .leftlbl p span{
+            color: #000;
+            cursor: pointer;
+        }
+        .wrap .leftlbl p span:hover{
+            color: orange;
+        }
+        .wrap .leftlbl>span{
+            display: inline-block;
+            margin: 10px 5px;
+            padding: 5px 10px;
+            color: #999;
+            border: 1px solid #999;
+        }
+        .wrap .leftlbl>span i{
+            display: inline-block;
+            margin-left: 10px;
+            width: 15px;
+            height: 100%;
+            font-size: 20px;
+            text-align: right;
+            border-left: 1px solid #999;
+            cursor: pointer;
+        }
+        .wrap .leftlbl>span i:hover{
+            color: red;
+        }
+        .wrap .rightlbl span{
+            display: inline-block;
+            margin: 10px;
+            padding: 5px;
+            font-size: 16px;
+            color: #fff;
+            border: 1px solid #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="content">
+        <div class="wrap">
+            <div class="leftlbl">
+                <p>热门目的地：
+                    <span>马来西亚</span>
+                    <span>泰国</span>
+                    <span>三亚</span>
+                    <span>新西兰</span>
+                    <span>云南</span>
+                </p>
+                <!-- <span>
+                    马来西亚
+                    <i>×</i>    
+                </span> -->
+            </div>
+            <div class="rightlbl">
+                <!-- <span>
+                    马来西亚
+                </span> -->
+            </div>
+        </div>
+    </div>
+    <script>
+        (function(){
+            let leftLbl = document.querySelector(".wrap .leftlbl");
+            let rightLbl = document.querySelector(".wrap .rightlbl");
+            let hotLbl = [...document.querySelectorAll(".wrap .leftlbl p>span")];
+            let isAdd = [];
+            
+            hotLbl.forEach((element,index) => {
+                element.onclick = function(){
+                    if(!isAdd[index]){
+                        isAdd[index] = {};
+                    }
+                    if(isAdd[index].bool) return;
+                    updateLbl(this.innerHTML,index);
+                    isAdd[index].bool = true;
+                }; 
+            });
+
+            function updateLbl(html,index) {
+                if(!isAdd[index].leftSpan){
+                    isAdd[index].leftSpan = document.createElement("span");
+                    isAdd[index].rightSpan = document.createElement("span");
+                    let aText = document.createTextNode(html);
+                    let aI = document.createElement("i");
+                    aI.innerHTML = "×";
+                    //生成左边LBL
+                    isAdd[index].leftSpan.appendChild(aText);
+                    isAdd[index].leftSpan.appendChild(aI);
+                    leftLbl.appendChild(isAdd[index].leftSpan);
+                    //生成右边LBL
+                    isAdd[index].rightSpan.innerHTML = html;
+                    rightLbl.appendChild(isAdd[index].rightSpan);
+
+                    //XX点击关闭事件
+                    aI.onclick = function(){
+                        leftLbl.removeChild(isAdd[index].leftSpan);
+                        rightLbl.removeChild(isAdd[index].rightSpan);
+                        isAdd[index].bool = false;  
+                    }
+                }
+                leftLbl.appendChild(isAdd[index].leftSpan);
+                rightLbl.appendChild(isAdd[index].rightSpan);
+            }
+           
+        })()
+    </script>
+</body>
+</html>

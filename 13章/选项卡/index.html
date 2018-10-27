@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body,
+        ul {
+            margin: 0;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        #wrap {
+            margin: 50px auto 0;
+            width: 704px;
+            height: 300px;
+
+        }
+
+        #wrap .label {
+            position: relative;
+            display: inline-block;
+            widows: 100px;
+        }
+
+        #wrap .label>li {
+            margin: 1px 0;
+            width: 100px;
+            height: 30px;
+            background: orchid;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        #wrap .label>li.show {
+            color: #fff;
+            background: #000;
+        }
+
+        ul ul {
+            display: none;
+        }
+
+        ul ul.show {
+            display: block;
+        }
+
+        #wrap ul ul li {
+            position: absolute;
+            top: 0px;
+            left: 100px;
+            width: 604px;
+            height: 298px;
+        }
+
+        ul ul li img {
+            display: none;
+        }
+
+        ul ul li img.show {
+            display: block;
+        }
+
+        .label .tabs {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 500px;
+            height: 30px;
+            text-align: left;
+            z-index: 99;
+        }
+
+        .label .tabs span {
+            display: inline-block;
+            margin-right: 10px;
+            width: 30px;
+            height: 30px;
+            color: aliceblue;
+            text-align: center;
+            background: rgba(0, 0, 0, .6);
+        }
+
+        .label .tabs span.show {
+            color: #000;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <ul class="label">
+            <li class="show">汽车
+                <ul class="show">
+                    <li><img src="./images/car/1.jpg" alt="" class="show">
+                        <div class="tabs"></div>
+                    </li>
+                    <li><img src="./images/car/2.jpg" alt=""></li>
+                    <li><img src="./images/car/3.jpg" alt=""></li>
+                    <li><img src="./images/car/4.jpg" alt=""></li>
+                    <li><img src="./images/car/5.jpg" alt=""></li>
+                    <li><img src="./images/car/6.jpg" alt=""></li>
+                </ul>
+
+            </li>
+            <li>美女
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/bitch/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/bitch/2.jpg" alt=""></li>
+                    <li><img src="./images/bitch/3.jpg" alt=""></li>
+                    <li><img src="./images/bitch/4.jpg" alt=""></li>
+                    <li><img src="./images/bitch/5.jpg" alt=""></li>
+                    <li><img src="./images/bitch/6.jpg" alt=""></li>
+                    <li><img src="./images/bitch/7.jpg" alt=""></li>
+                    <li><img src="./images/bitch/8.jpg" alt=""></li>
+                </ul>
+
+            </li>
+            <li>游戏
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/game/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/game/2.jpg" alt=""></li>
+                    <li><img src="./images/game/3.jpg" alt=""></li>
+                    <li><img src="./images/game/4.jpg" alt=""></li>
+                    <li><img src="./images/game/5.jpg" alt=""></li>
+                </ul>
+            </li>
+            <li>美女
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/bitch/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/bitch/2.jpg" alt=""></li>
+                    <li><img src="./images/bitch/3.jpg" alt=""></li>
+                    <li><img src="./images/bitch/4.jpg" alt=""></li>
+                    <li><img src="./images/bitch/5.jpg" alt=""></li>
+                    <li><img src="./images/bitch/6.jpg" alt=""></li>
+                    <li><img src="./images/bitch/7.jpg" alt=""></li>
+                    <li><img src="./images/bitch/8.jpg" alt=""></li>
+                </ul>
+
+            </li>
+            <li>游戏
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/game/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/game/2.jpg" alt=""></li>
+                    <li><img src="./images/game/3.jpg" alt=""></li>
+                    <li><img src="./images/game/4.jpg" alt=""></li>
+                    <li><img src="./images/game/5.jpg" alt=""></li>
+                </ul>
+            </li>
+            <li>美女
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/bitch/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/bitch/2.jpg" alt=""></li>
+                    <li><img src="./images/bitch/3.jpg" alt=""></li>
+                    <li><img src="./images/bitch/4.jpg" alt=""></li>
+                    <li><img src="./images/bitch/5.jpg" alt=""></li>
+                    <li><img src="./images/bitch/6.jpg" alt=""></li>
+                    <li><img src="./images/bitch/7.jpg" alt=""></li>
+                    <li><img src="./images/bitch/8.jpg" alt=""></li>
+                </ul>
+
+            </li>
+            <li>游戏
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/game/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/game/2.jpg" alt=""></li>
+                    <li><img src="./images/game/3.jpg" alt=""></li>
+                    <li><img src="./images/game/4.jpg" alt=""></li>
+                    <li><img src="./images/game/5.jpg" alt=""></li>
+                </ul>
+            </li>
+            <li>美女
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/bitch/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/bitch/2.jpg" alt=""></li>
+                    <li><img src="./images/bitch/3.jpg" alt=""></li>
+                    <li><img src="./images/bitch/4.jpg" alt=""></li>
+                    <li><img src="./images/bitch/5.jpg" alt=""></li>
+                    <li><img src="./images/bitch/6.jpg" alt=""></li>
+                    <li><img src="./images/bitch/7.jpg" alt=""></li>
+                    <li><img src="./images/bitch/8.jpg" alt=""></li>
+                </ul>
+
+            </li>
+            <li>游戏
+                <ul>
+                    <li>
+                        <div class="tabs"></div><img src="./images/game/1.jpg" alt="" class="show">
+                    </li>
+                    <li><img src="./images/game/2.jpg" alt=""></li>
+                    <li><img src="./images/game/3.jpg" alt=""></li>
+                    <li><img src="./images/game/4.jpg" alt=""></li>
+                    <li><img src="./images/game/5.jpg" alt=""></li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+    <script>
+        (function () {
+            let leftLbl = document.querySelectorAll("#wrap .label>li"), //获取左边标签LI
+                picArea = document.querySelectorAll(".label>li>ul"), //获取图片展示区域UL盒子 
+                tabs = document.querySelectorAll(".label .tabs"), //图片下方tab标签区域
+                lenLbl = leftLbl.length; //左边标签length
+
+            let picLi = document.querySelectorAll(".show>li"), //画第一张初始图片下面的span标签
+                len = picLi.length;
+            for (let x = 0; x < len; x++) {
+                tabs[0].innerHTML += `<span>${x+1}</span>`;
+            } //以下开始 操作了。。不知道这种思想怎么简单化，一层套一层的。不会简单化。。
+            //有些变量全部在内部，不知道是否合规
+            for (let i = 0; i < lenLbl; i++) {
+                leftLbl[i].onmouseenter = function () { //左label 鼠标滑过
+                    for (let x = 0; x < lenLbl; x++) {
+                        picArea[x].className = x !== i ? "" : "show"; //图片区域 显示与隐藏
+                        leftLbl[x].className = x !== i ? "" : "show"; //按钮样式 显示与隐藏
+                        tabs[x].innerHTML = ""; //清空上一次鼠标经过创建的spanLab  
+                    }
+
+                    let picLi = document.querySelectorAll(".show>li"), //获取已激活图片区域的 IMG length
+                        len = picLi.length;
+                    for (let x = 0; x < len; x++) {
+                        tabs[i].innerHTML += `<span>${x+1}</span>`; //给激活的图片区域  下方根据图片数量添加 spanLab标签
+                    }
+                    let spanTab = document.querySelectorAll(".show>li span"), //获取spanLab  以及img 控制
+                        imgIndex = document.querySelectorAll(".show>li img");
+                    for (let i = 0; i < len; i++) {
+                        spanTab[i].onmouseenter = function () { //鼠标滑过spanLab样式 以及 图片切换 
+                            for (let x = 0; x < len; x++) {
+                                imgIndex[x].className = x !== i ? "" : "show";
+                                spanTab[x].className = x !== i ? "" : "show";
+                            }
+                        }
+                    }
+                }
+            }
+        })()
+    </script>
+</body>
+
+</html>
