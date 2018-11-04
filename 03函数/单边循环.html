@@ -1,0 +1,156 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #wrap{
+            position: relative;
+            margin: 100px auto 0;
+            width: 604px;
+            height: 298px;
+            text-align: center;
+            user-select: none;
+        }
+        #wrap ul{
+            width: 100%;
+            height: 100%;
+        }
+        #wrap li{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+        #wrap li.active{
+            opacity: 1;
+            visibility: visible;
+        }
+        #wrap p{
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 50px;
+            line-height: 30px;
+            font-size: 15px;
+            color: #fff;
+            background: rgba(0,0,0,.5);
+            text-align: center;
+        }
+        #wrap div{
+            position: absolute;
+            width: 30px;
+            height: 50px;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            color: #fff;
+            font-size: 30px;
+            line-height: 50px;
+            text-align: center;
+            background: rgba(0,0,0,.5);
+            cursor: pointer;
+        }
+        .nextbtn{
+            right: 0;
+        }
+        #wrap>span{
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            background: #000;
+            color: #fff;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #wrap>span.active{
+            background: #ccc;
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul class="imgbox">
+            <li>
+                <img src="./images/2.jpg" alt="">
+            </li>
+            <li>
+                <img src="./images/3.jpg" alt="">
+            </li>
+            <li>
+                <img src="./images/4.jpg" alt="">
+            </li>
+            <li>
+                <img src="./images/1.jpg" alt="">
+            </li>
+        </ul>
+        <p></p>
+        <div class="nextbtn">&gt</div>
+        <div class="prevbtn">&lt</div>
+        <span class="active">单边模式</span>
+        <span>循环模式</span>
+    </div>
+    <script>
+        (function(){
+            let imgList = [...document.querySelectorAll(".imgbox li")];
+            let imgNumLable = document.querySelector("#wrap p");
+            let nextBtn = document.querySelector(".nextbtn");
+            let prevBtn = document.querySelector(".prevbtn");
+            let normalBtn = document.querySelectorAll("#wrap>span")[0];
+            let loopBtn = document.querySelectorAll("#wrap>span")[1];
+            let index = 0;
+            let isLoop = false;
+            let imgNum = imgList.length;
+            
+            //刷新显示图片状态
+            function updateImg() {
+                imgList.forEach(ele => {
+                    ele.classList.remove("active");
+                });
+                imgList[index].classList.add("active");
+                imgNumLable.innerHTML = `${index + 1} / ${imgNum}`;
+            }
+            //刷新按钮状态
+            function updateBtn() {
+                isLoop ? normalBtn.classList.remove("active") : normalBtn.classList.add("active");
+                isLoop ? loopBtn.classList.add("active") : loopBtn.classList.remove("active");
+            }
+            updateImg();
+            //点击单边
+            normalBtn.onclick = function() {
+                isLoop = false;
+                updateBtn();
+            };
+            //点击循环
+            loopBtn.onclick = function() {
+                isLoop = true;
+                updateBtn();
+            };
+            //点击下一张
+            nextBtn.onclick = function() {
+                index++;
+                index = isLoop ? index % imgNum : Math.min(imgNum-1,index);
+                updateImg();
+            };
+            //点击上一张
+            prevBtn.onclick = function() {
+                index--;
+                index = isLoop ? (index + imgNum) % imgNum : Math.max(0,index);
+                updateImg();
+            };
+        })()
+    </script>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset = "UTF-8">
+    <title>JS学习</title>
+    <meta name="keywords" content="学习">
+    <meta name="description" content="这是一个学习的第一课">
+    <style>
+        body,p,h1,h2,h3,h4,h5,h6,ul{margin: 0;padding: 0;}
+        body{font:12px"宋体","Arial Narrow",HELVETICA;background:#fff;-webkit-text-size-adjust:100%;}
+        li{list-style: none;}
+        a{text-decoration: none;}
+        img{border: 0;vertical-align: middle;}
+        #listbox{
+            position: relative;
+            width: 200px;
+            user-select: none;
+        }
+        #listbox p{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            font-family: "黑体";
+            color: #fff;
+            font-size: 16px;
+            text-indent: 1em;
+            background:#4595fe; 
+        }
+        #listbox p b{
+            cursor: pointer;
+        }
+        #listbox p span{
+            margin-left: 90px;
+            font-size: 30px;
+            vertical-align: -5px;
+            cursor: pointer;
+        }
+        #listbox ul{
+            height: 0;
+            overflow: hidden;  
+        }
+        #listbox ul.active{
+            height: 100%;
+        } 
+        #listbox li{
+            text-indent: 2em;
+            font-size: 14px;
+            height: 40px;
+            line-height: 40px;
+            border-bottom: 1px solid #fff;
+            background:#4273b4;
+            cursor: pointer;
+        }
+        #listbox div{
+            display: none;
+            height: 40px;
+        }
+        #listbox div.active{
+            display: block;
+        }
+        #listbox div input{
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            width: 70%;
+            height: 40px;
+            border: none;
+            outline: 1px solid #000;
+            text-indent: 2em;
+        }
+        #listbox div span{
+            display: inline-block;
+            margin-left: 10px;
+            width: 20%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            background: #ccc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="listbox">
+        <p><b>我的好友</b><span>+</span></p>
+        <div><input type="text"><span>添加</span></div>
+        <ul class="active">
+            <li>狗蛋</li>
+            <li>王麻子</li>
+            <li>二狗</li>
+        </ul>
+        <p><b>业务关系</b><span>+</span></p>
+        <div><input type="text"><span>添加</span></div>
+        <ul>
+            <li>老板</li>
+            <li>大佬</li>
+            <li>秘书</li>
+            <li>2老板</li>
+            <li>大佬</li>
+            <li>3秘书</li>
+        </ul>
+        <p><b>我的老师</b><span>+</span></p>
+        <div><input type="text"><span>添加</span></div>
+        <ul>
+            <li>加藤鹰</li>
+            <li>苍老师</li>
+            <li>波老师</li>
+        </ul>
+    </div>
+    <script>
+        (function() {
+             let classifyBtn = document.querySelectorAll("#listbox p b");
+             let addBtn = document.querySelectorAll("#listbox p span");
+             let nameList = document.querySelectorAll("#listbox ul");
+             let inputBox = document.querySelectorAll("#listbox div");
+             let inputText = document.querySelectorAll("div input");
+             let addText = document.querySelectorAll("div>span");
+             
+             //刷新列表界面
+             function updateNameList(index) {
+                for(let i = 0; i < nameList.length; i ++){
+                    nameList[i].classList.remove("active"); 
+                    inputBox[i].classList.remove("active");
+                    addBtn[i].innerHTML = "+";
+                }
+                nameList[index].classList.add("active");
+             }
+             //点击好友分类
+             [...classifyBtn].forEach((ele,index) => {
+                 ele.onclick = function() {
+                    updateNameList(index);
+                 };
+             });
+             //点击添加BTN
+             [...addBtn].forEach((ele,index) => {
+                 ele.onclick = function() {
+                    if(nameList[index].className === "active"){
+                        inputBox[index].classList.toggle("active");
+                        ele.innerHTML = ele.innerHTML === "+" ? "-" : "+";
+                    }
+                 };
+             });
+             //添加好友
+             [...addText].forEach((ele,index) =>{
+                ele.onclick = function(){
+                    let html = inputText[index].value;
+                    inputText[index].value = "";
+                    if(html)nameList[index].innerHTML += `<li>${html}</li>`;
+                };
+             });
+        })()
+    </script>
+</body>
+</html>
